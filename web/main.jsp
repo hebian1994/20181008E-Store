@@ -1,6 +1,7 @@
 <%@page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<%@page import="java.sql.*" %>
+<%@page import="ldj.service.impl.GoodsServiceImpl" %>
+<%@ page import="ldj.pojo.Goods" %>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -8,33 +9,32 @@
 </head>
 <body>
 <%
-    Connection conn=null;
-    Statement st=null;
-    ResultSet rs=null;
-    try{
-        Class.forName("com.mysql.jdbc.Driver").newInstance();
-        conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/shopping","root","123456");
-    }catch(Exception ex){
-        System.out.println("数据库连接失败");
-    }
-    st=conn.createStatement();
-    rs=st.executeQuery("select picture,goodsName,originalPrice,introduce,id from tb_goods");
-    while(rs.next()){
+    GoodsServiceImpl goodsService=new GoodsServiceImpl();
+    List<Goods> goodsList=goodsService.selectAllGoods();
+    for (int i=0;i<goodsList.size();i++){
+        Goods goods=(Goods)goodsList.get(i);
 %>
-<div align="center">
-    <image src="<%=rs.getString("picture")%>" width="110" height="100"/>
-</div>
-<div align="center"><%=rs.getString("goodsName") %></div>
-<div align="center">单价：<%=rs.getString("originalPrice")%>元</div>
-<div align="center"><%=rs.getString("introduce")%></div>
-<div align="center"><%=rs.getString("id") %></div>
+<table width="320" height="136" border="1" align="center" cellpadding="1" cellspacing="1" bordercolor="#FFFFFF" bgcolor="#999999">
+<tr>
+    <td width="40%" height="80" rowspan="5" bgcolor="#FFFFFF">
+        <div align="center">
+            <image src="<%=goods.getPicture()%>" width="110" height="100"/>
+        </div>
+    </td>
+    <td width="58%" bgcolor="#FFFFFF">
+        <div align="center"><%=goods.getGoodsName() %></div>
+        <div align="center">单价：<%=goods.getCurrentPrice()%>元</div>
+        <div align="center"><%=goods.getIntroduce()%></div>
+        <div align="center"><%=goods.getId()%></div>
+        <div align="left">
+            登陆后才能购买
+        </div>
+    </td>
+</tr>
+</table>
 <%
     }
-    rs.close();
-    st.close();
-    conn.close();
 %>
-<br>
-<h2 align="center">登录后才能购买</h2>
+
 </body>
 </html>
