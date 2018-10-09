@@ -8,4 +8,5 @@
       
       pojo+dao+service
       
-      使用jsp导入service类，得到List,再将List中的数据展示到页面的一个table中
+      使用jsp导入service类，得到List,再将List中的数据展示到页面的一个table         
+      展示新平，并且实现分页
