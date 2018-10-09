@@ -23,4 +23,14 @@ public class TestGoods {
         List<Goods> l=g.selectAllGoods();
         System.out.println(l.get(0));
     }
+    @Test
+    public void selectGoodsDiscount(){
+        GoodsDao g=new GoodsDao();
+        System.out.println(g.selectGoodsDiscount("1"));
+    }
+    @Test
+    public void selectGoodsDiscountService()throws Exception{
+        GoodsServiceImpl g=new GoodsServiceImpl();
+        System.out.println(g.selectGoodsDiscount("1"));
+    }
 }

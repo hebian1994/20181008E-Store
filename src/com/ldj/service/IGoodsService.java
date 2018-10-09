@@ -22,6 +22,7 @@ public interface IGoodsService {
      */
     public List<Goods> selectAllGoods()throws Exception;
 
+    public List<Goods> selectGoodsDiscount(String str)throws Exception;
     /**
      * 实现数据更新操作方法
      * @param vo 表示要执行更新操作的数据

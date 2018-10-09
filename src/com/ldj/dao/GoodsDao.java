@@ -19,7 +19,19 @@ public class GoodsDao {
             return qr.query(sql, new BeanListHandler<>(Goods.class));
         }catch(SQLException ex){
             System.out.println(ex);
-            throw new RuntimeException("条件查询失败");
+            throw new RuntimeException("查询失败");
+        }
+    }
+    //查找打折商品
+    public List<Goods> selectGoodsDiscount(String str){
+        try {
+            //拼写条件查询的SQL语句
+            String sql = "SELECT * FROM tb_goods where discount="+str;
+            //调用qr对象的方法query查询数据表,获取结果
+            return qr.query(sql, new BeanListHandler<>(Goods.class));
+        } catch (SQLException ex) {
+            System.out.println(ex);
+            throw new RuntimeException("查询失败");//这里也需要返回值
         }
     }
 }

@@ -7,6 +7,7 @@ import ldj.service.IGoodsService;
 import java.util.List;
 
 public class GoodsServiceImpl implements IGoodsService{
+   private GoodsDao g=new GoodsDao();
     @Override
     public boolean insert(Goods vo) throws Exception {
         return false;
@@ -14,8 +15,12 @@ public class GoodsServiceImpl implements IGoodsService{
 
     @Override
     public List<Goods> selectAllGoods() throws Exception {
-        GoodsDao g=new GoodsDao();
         return g.selectGoods();
+    }
+
+    @Override
+    public List<Goods> selectGoodsDiscount(String str) throws Exception {
+        return g.selectGoodsDiscount(str);
     }
 
     @Override
